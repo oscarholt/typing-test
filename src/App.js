@@ -19,23 +19,30 @@ function App() {
   }
 
   function start() {
-    setInterval(() => {
-      setCountDown((prevCountDown) => prevCountDown - 1)
-    } , 1000)
+    let interval = setInterval(() => {
+      setCountDown((prevCountDown) => {
+        if (prevCountDown === 0) {
+          clearInterval(interval)
+          return
+        } else {
+          return prevCountDown - 1
+        }
+      })
+      }, 1000)
   }
 
   return (
     <div className='App'>
-      <div className="section">
-        <div className="is-size-1 has-text-centered has-text-primary">
+      <div className='section'>
+        <div className='is-size-1 has-text-centered has-text-primary'>
           <h2>{countDown}</h2>
         </div>
       </div>
-      <div className="control is-expanded section">
-        <input type="text"className="input"/>
+      <div className='control is-expanded section'>
+        <input type='text' className='input' />
       </div>
-      <div className="section">
-        <button className="button is-info is-fullwidth" onClick={start}>
+      <div className='section'>
+        <button className='button is-info is-fullwidth' onClick={start}>
           Start
         </button>
       </div>
