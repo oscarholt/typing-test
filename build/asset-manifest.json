@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/oscarholt/typing-teststatic/css/main.5739ad41.chunk.css",
+    "main.js": "/oscarholt/typing-teststatic/js/main.0eeb861f.chunk.js",
+    "main.js.map": "/oscarholt/typing-teststatic/js/main.0eeb861f.chunk.js.map",
+    "runtime-main.js": "/oscarholt/typing-teststatic/js/runtime-main.6cfd83d6.js",
+    "runtime-main.js.map": "/oscarholt/typing-teststatic/js/runtime-main.6cfd83d6.js.map",
+    "static/js/2.0299274a.chunk.js": "/oscarholt/typing-teststatic/js/2.0299274a.chunk.js",
+    "static/js/2.0299274a.chunk.js.map": "/oscarholt/typing-teststatic/js/2.0299274a.chunk.js.map",
+    "static/js/3.159aafea.chunk.js": "/oscarholt/typing-teststatic/js/3.159aafea.chunk.js",
+    "static/js/3.159aafea.chunk.js.map": "/oscarholt/typing-teststatic/js/3.159aafea.chunk.js.map",
+    "index.html": "/oscarholt/typing-testindex.html",
+    "static/css/main.5739ad41.chunk.css.map": "/oscarholt/typing-teststatic/css/main.5739ad41.chunk.css.map",
+    "static/js/2.0299274a.chunk.js.LICENSE.txt": "/oscarholt/typing-teststatic/js/2.0299274a.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/oscarholt/typing-teststatic/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6cfd83d6.js",
+    "static/js/2.0299274a.chunk.js",
+    "static/css/main.5739ad41.chunk.css",
+    "static/js/main.0eeb861f.chunk.js"
+  ]
+}
