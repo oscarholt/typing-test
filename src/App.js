@@ -9,6 +9,8 @@ function App() {
   const [countDown, setCountDown] = useState(SECONDS);
   const [currentInput, setCurrentInput] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
 
   useEffect(() => {
     //Sets our words state to be an array of generated words using the random-words package
@@ -44,7 +46,11 @@ function App() {
   function checkMatch() {
     const wordToCompare = words[currentWordIndex];
     const doesMatch = wordToCompare === currentInput.trim();
-    console.log(doesMatch);
+    if (doesMatch) {
+      setCorrect(correct + 1);
+    } else {
+      setIncorrect(incorrect + 1);
+    }
   }
 
   return (
@@ -89,13 +95,15 @@ function App() {
         </div>
         <div className="section">
           <div className="columns">
-            <div className="column">
+            <div className="column has-text-centered">
               <p className="is-size-5">Words Per Minute:</p>
-              <p className="has-text-primary is-size-1">{32}</p>
+              <p className="has-text-primary is-size-1">{correct}</p>
             </div>
-            <div className="column">
+            <div className="column has-text-centered">
               <p className="is-size-5">Accuracy:</p>
-              <p className="has-text-info is-size-1">{"100%"}</p>
+              <p className="has-text-info is-size-1">
+                {Math.round((correct / (correct + incorrect)) * 100)}
+              </p>
             </div>
           </div>
         </div>
