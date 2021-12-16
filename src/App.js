@@ -87,6 +87,18 @@ function App() {
             </div>
           </div>
         </div>
+        <div className="section">
+          <div className="columns">
+            <div className="column">
+              <p className="is-size-5">Words Per Minute:</p>
+              <p className="has-text-primary is-size-1">{32}</p>
+            </div>
+            <div className="column">
+              <p className="is-size-5">Accuracy:</p>
+              <p className="has-text-info is-size-1">{"100%"}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
