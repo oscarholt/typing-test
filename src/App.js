@@ -11,6 +11,7 @@ function App() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
+  const [status, setStatus] = useState("waiting");
 
   useEffect(() => {
     //Sets our words state to be an array of generated words using the random-words package
@@ -23,16 +24,27 @@ function App() {
   }
 
   function start() {
-    let interval = setInterval(() => {
-      setCountDown((prevCountDown) => {
-        if (prevCountDown === 0) {
-          clearInterval(interval);
-          return;
-        } else {
-          return prevCountDown - 1;
-        }
-      });
-    }, 1000);
+    if (status === "finished") {
+      setWords(generateWords());
+      setCurrentWordIndex(0);
+      setCorrect(0);
+      setIncorrect(0);
+    }
+    if (status !== "started") {
+      setStatus("started");
+      let interval = setInterval(() => {
+        setCountDown((prevCountDown) => {
+          if (prevCountDown === 0) {
+            clearInterval(interval);
+            setStatus("finished");
+            setCurrentInput("");
+            return SECONDS;
+          } else {
+            return prevCountDown - 1;
+          }
+        });
+      }, 1000);
+    }
   }
 
   function handleKeyDown({ keyCode }) {
@@ -62,6 +74,7 @@ function App() {
       </div>
       <div className="control is-expanded section">
         <input
+          disabled={status !== "started"}
           type="text"
           className="input"
           onKeyDown={handleKeyDown}
@@ -74,25 +87,29 @@ function App() {
           Start
         </button>
       </div>
-      <div className="section">
-        <div className="card">
-          <div className="card-content">
-            <div className="content">
-              {words.map((word, i) => {
-                return (
-                  <span key={i}>
-                    <span>
-                      {word.split("").map((char, idx) => (
-                        <span key={idx}>{char}</span>
-                      ))}
+      {status === "started" && (
+        <div className="section">
+          <div className="card">
+            <div className="card-content">
+              <div className="content">
+                {words.map((word, i) => {
+                  return (
+                    <span key={i}>
+                      <span>
+                        {word.split("").map((char, idx) => (
+                          <span key={idx}>{char}</span>
+                        ))}
+                      </span>
+                      <span> </span>
                     </span>
-                    <span> </span>
-                  </span>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
+      )}
+      {status === "finished" && (
         <div className="section">
           <div className="columns">
             <div className="column has-text-centered">
@@ -102,12 +119,12 @@ function App() {
             <div className="column has-text-centered">
               <p className="is-size-5">Accuracy:</p>
               <p className="has-text-info is-size-1">
-                {Math.round((correct / (correct + incorrect)) * 100)}
+                {Math.round((correct / (correct + incorrect)) * 100) + "%"}
               </p>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
