@@ -64,6 +64,9 @@ function App() {
       setCurrentInput("");
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentCharIndex(-1);
+    } else if (keyCode === 8) {
+      setCurrentCharIndex(currentCharIndex - 1);
+      setCurrentChar("");
     } else {
       setCurrentCharIndex(currentCharIndex + 1);
       setCurrentChar(key);
@@ -92,6 +95,11 @@ function App() {
       } else {
         return "has-background-danger";
       }
+    } else if (
+      wordIdx === currentWordIndex &&
+      currentCharIndex > words[currentWordIndex].length
+    ) {
+      return "has-background-danger";
     } else {
       return "";
     }
