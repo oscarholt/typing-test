@@ -9,6 +9,8 @@ function App() {
   const [countDown, setCountDown] = useState(SECONDS);
   const [currentInput, setCurrentInput] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(-1);
+  const [currentChar, setCurrentChar] = useState("");
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [status, setStatus] = useState("waiting");
@@ -54,11 +56,15 @@ function App() {
     }
   }
 
-  function handleKeyDown({ keyCode }) {
+  function handleKeyDown({ keyCode, key }) {
     if (keyCode === 32) {
       checkMatch();
       setCurrentInput("");
       setCurrentWordIndex(currentWordIndex + 1);
+      setCurrentCharIndex(-1);
+    } else {
+      setCurrentCharIndex(currentCharIndex + 1);
+      setCurrentChar(key);
     }
   }
 
@@ -69,6 +75,23 @@ function App() {
       setCorrect(correct + 1);
     } else {
       setIncorrect(incorrect + 1);
+    }
+  }
+
+  function getCharClass(wordIdx, charIdx, char) {
+    if (
+      wordIdx === currentWordIndex &&
+      charIdx === currentCharIndex &&
+      currentChar &&
+      status != "finished"
+    ) {
+      if (char === currentChar) {
+        return "has-background-success";
+      } else {
+        return "has-background-danger";
+      }
+    } else {
+      return "";
     }
   }
 
@@ -105,7 +128,12 @@ function App() {
                     <span key={i}>
                       <span>
                         {word.split("").map((char, idx) => (
-                          <span key={idx}>{char}</span>
+                          <span
+                            className={getCharClass(i, idx, char)}
+                            key={idx}
+                          >
+                            {char}
+                          </span>
                         ))}
                       </span>
                       <span> </span>
