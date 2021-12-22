@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
 
 const NUMB_OF_WORDS = 200;
@@ -12,11 +12,18 @@ function App() {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [status, setStatus] = useState("waiting");
+  const textInput = useRef(null);
 
   useEffect(() => {
     //Sets our words state to be an array of generated words using the random-words package
     setWords(generateWords());
   }, []);
+
+  useEffect(() => {
+    if (status === "started") {
+      textInput.current.focus();
+    }
+  }, [status]);
 
   function generateWords() {
     // Returns an array of random words
@@ -74,6 +81,7 @@ function App() {
       </div>
       <div className="control is-expanded section">
         <input
+          ref={textInput}
           disabled={status !== "started"}
           type="text"
           className="input"
