@@ -38,6 +38,8 @@ function App() {
       setCurrentWordIndex(0);
       setCorrect(0);
       setIncorrect(0);
+      setCurrentCharIndex(-1);
+      setCurrentChar("");
     }
     if (status !== "started") {
       setStatus("started");
